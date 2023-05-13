@@ -10,12 +10,21 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class LocalFarmMarketplacePlatformApplication {
 
+	@Value("${spring.datasource.url}")
+	private String databaseServer;
+
+	@Value("${spring.datasource.username}")
+	private String userName;
+
+	@Value("${spring.datasource.password}")
+	private String password;
+
 	public static void main(String[] args) {
 		SpringApplication.run(LocalFarmMarketplacePlatformApplication.class, args);
 
 
 		try {
-			DatabaseConnection connection = new DatabaseConnection("jdbc:mysql://localhost:3306/localfarmermarketplacedatabase", "root", "gamzenur61");
+			DatabaseConnection connection = new DatabaseConnection(databaseServer, userName, password);
 
 			// Execute a query
 			ResultSet results = connection.executeQuery("SELECT * FROM USERS");
